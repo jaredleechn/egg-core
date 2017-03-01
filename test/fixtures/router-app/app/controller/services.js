@@ -13,3 +13,7 @@ exports.after = function* () {
 exports.customize = function* () {
   this.body = 'customize - ' + this.params.id;
 };
+
+exports.update = function* () {
+  this.body = 'update';
+}

@@ -152,18 +152,23 @@ describe('test/utils/router.test.js', () => {
           .expect(200);
       });
     });
-    describe('support actions to entity', function() {
-      it('should POST /services/a/before', () => {
-        return request(app.callback())
-          .post('/services/a/before')
-          .expect('customize - a');
-      });
-      it('should POST /services/a/customize', () => {
+    describe('register rest method from controller as post action', function() {
+      it('should support action', () => {
         return request(app.callback())
           .post('/services/a/customize')
           .expect('customize - a');
       });
-      it('should POST /services/a/after', () => {
+      it('should not register method in REST_MAP', () => {
+        return request(app.callback())
+          .post('/services/a/update')
+          .expect(404);
+      });
+      it('should customized for earlier defining', () => {
+        return request(app.callback())
+          .post('/services/a/before')
+          .expect('customize - a');
+      });
+      it('should NOT customized for later defining', () => {
         return request(app.callback())
           .post('/services/a/after')
           .expect('after - a')
