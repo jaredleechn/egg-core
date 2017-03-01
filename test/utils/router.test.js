@@ -152,6 +152,24 @@ describe('test/utils/router.test.js', () => {
           .expect(200);
       });
     });
+    describe('support actions to entity', function() {
+      it('should POST /services/a/before', () => {
+        return request(app.callback())
+          .post('/services/a/before')
+          .expect('customize - a');
+      });
+      it('should POST /services/a/customize', () => {
+        return request(app.callback())
+          .post('/services/a/customize')
+          .expect('customize - a');
+      });
+      it('should POST /services/a/after', () => {
+        return request(app.callback())
+          .post('/services/a/after')
+          .expect('after - a')
+          .expect(200);
+      });
+    });
   });
 
   describe('router.url', () => {
